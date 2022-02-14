@@ -38,8 +38,8 @@ export default function Home({ posts }: Props) {
       <Banner />
 
       <section
-        className="mx-5 grid max-w-6xl grid-cols-1 gap-4
-      py-4 pt-5 sm:grid-cols-2 lg:mx-auto lg:grid-cols-3"
+        className="mx-5 grid max-w-7xl grid-cols-1 gap-4
+       pt-5 sm:grid-cols-2 lg:mx-auto lg:grid-cols-3"
       >
         {posts.map(({ _id, slug, title, author, description, mainImage }) => (
           <Post
@@ -78,6 +78,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       posts,
     },
-    revalidate: 60,
+    revalidate: 10,
   }
 }

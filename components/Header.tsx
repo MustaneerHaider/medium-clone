@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
 interface Props {
   show: boolean
@@ -13,7 +12,7 @@ function Header({ show }: Props) {
     ${!show ? 'bg-blue-200' : 'bg-white'} transition-all duration-150`}
     >
       <div
-        className="mx-5 flex max-w-6xl items-center 
+        className="mx-5 flex max-w-7xl items-center 
       justify-between py-3 lg:mx-auto"
       >
         {/* Left */}

@@ -4,8 +4,8 @@ function Banner() {
   return (
     <div className="border-b border-black bg-blue-200 py-8 lg:py-0">
       <div
-        className="mx-5 flex max-w-6xl items-center 
-      justify-between lg:mx-auto"
+        className="flex items-center justify-between 
+      px-5 lg:px-10"
       >
         {/* Left */}
         <div className="max-w-lg">

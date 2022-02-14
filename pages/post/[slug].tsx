@@ -59,7 +59,10 @@ function Post({ post }: Props) {
         className="h-36 w-full object-cover"
       />
 
-      <section className="mx-5 mt-10 max-w-lg border-b-2 border-blue-500 pb-4 lg:mx-auto">
+      <section
+        className="mx-5 mt-10 max-w-lg border-b-2 border-blue-500 pb-4 
+      md:mx-auto"
+      >
         <h4 className="text-3xl font-semibold">{post.title}</h4>
 
         <p className="mt-2 text-xl italic text-gray-600">{post.description}</p>
@@ -85,7 +88,7 @@ function Post({ post }: Props) {
         </div>
       </section>
 
-      <section className="mx-5 mt-8 max-w-lg pb-10 lg:mx-auto">
+      <section className="mx-5 mt-8 max-w-lg pb-10 md:mx-auto">
         {submitted ? (
           <div
             className="relative rounded-md bg-blue-400
@@ -128,7 +131,7 @@ function Post({ post }: Props) {
                   <Input name="comment" label="Comment" textArea />
                   <button
                     className="mt-5 w-full rounded-sm bg-blue-400 p-2
-              ring-blue-700 active:ring-2"
+              ring-blue-700 active:ring-2 md:hover:bg-blue-500"
                     type="submit"
                   >
                     {isLoading ? 'Submitting...' : 'Submit'}
@@ -140,8 +143,13 @@ function Post({ post }: Props) {
         )}
 
         {/* comments */}
-        <div className="mt-10 rounded-sm bg-white p-4 shadow-md shadow-blue-400">
-          <h1 className="mb-4 text-2xl font-semibold">Comments</h1>
+        <div className="mt-10 rounded-sm bg-white p-5 shadow shadow-blue-400">
+          <h1
+            className="mb-4 border-b border-blue-200 pb-2
+          text-2xl font-semibold"
+          >
+            Comments
+          </h1>
           {post.comments?.map(({ _id, name, comment }) => (
             <div className="my-1 flex items-center text-sm" key={_id}>
               <h2 className="truncate font-semibold text-blue-400">{name}</h2>
@@ -177,9 +185,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { slug } = context.params!
-
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await sanityClient.fetch(
     `
     *[_type == "post" && slug.current == $slug]{
@@ -202,13 +208,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
       }
     }[0]
   `,
-    { slug }
+    { slug: params?.slug }
   )
+
+  if (!post) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: {
       post,
     },
-    revalidate: 60,
   }
 }

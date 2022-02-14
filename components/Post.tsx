@@ -16,7 +16,7 @@ function Post({ title, slug, description, mainImage, author }: Props) {
           />
         </div>
 
-        <h4 className="pt-1.5 pl-4 font-semibold">{title}</h4>
+        <h4 className="truncate pt-1.5 pl-4 font-semibold">{title}</h4>
 
         <div className="flex items-center justify-between px-4 pb-1">
           <p className="truncate text-xs">{description}</p>
