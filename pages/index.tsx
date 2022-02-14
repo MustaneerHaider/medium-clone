@@ -39,7 +39,7 @@ export default function Home({ posts }: Props) {
 
       <section
         className="mx-5 grid max-w-7xl grid-cols-1 gap-4
-       pt-5 sm:grid-cols-2 lg:mx-auto lg:grid-cols-3"
+       p-4 sm:grid-cols-2 lg:mx-auto lg:grid-cols-3"
       >
         {posts.map(({ _id, slug, title, author, description, mainImage }) => (
           <Post
