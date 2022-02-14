@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
 import { sanityClient } from '../lib/client'
@@ -57,7 +57,7 @@ export default function Home({ posts }: Props) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const posts = await sanityClient.fetch(
     `
       *[_type == "post"] | order(publishedAt desc){
@@ -78,5 +78,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       posts,
     },
+    revalidate: 60,
   }
 }
